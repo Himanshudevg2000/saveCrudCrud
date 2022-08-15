@@ -34,18 +34,25 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function onScreen(detail){
     const parentNode = document.getElementById('users');
-    const childHTML = `<li id=${detail.description} > ${detail.expense} - ${detail.description} - ${detail.category}  <button id="edit" onclick=editUser('${detail.description}','${detail.expense}')> Edit </button> <button onclick=deleteUser('${detail.description}')> Delete </button>  </li>`
+    const childHTML = `<li id=${detail._id} > ${detail.expense} - ${detail.description} - ${detail.category}  <button id="edit" onclick=editUser('${detail._id}','${detail.expense}')> Edit </button> <button onclick=deleteUser('${detail._id}')> Delete </button>  </li>`
     parentNode.innerHTML = parentNode.innerHTML + childHTML;
 }
 
-function deleteUser(Chdescription) {
-    localStorage.removeItem(Chdescription);
-    removeFromScreen(Chdescription);
+function deleteUser(detailId) {
+
+    axios.delete(`https://crudcrud.com/api/c5b33544f7424d029bfe2359da78198b/AppointmentData/${detailId}`)
+    .then((response) => {
+        removeFromScreen(detailId)
+    })
+    .catch((err) => {
+        document.body.innerHTML = document.body.innerHTML + "<h6> Nothing to delete </h6> "
+        console.log(err)
+    })
 }
 
-function removeFromScreen(Chdescription){
+function removeFromScreen(detailId){
     const parentNode = document.getElementById('users');
-    const childNodeToDelete = document.getElementById(Chdescription);
+    const childNodeToDelete = document.getElementById(detailId);
     parentNode.removeChild(childNodeToDelete);
 }
 
