@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    background-color: rgb(216, 238, 245);
+    padding: 20px;
+}
+
+.container {
+    background-color: rgb(216, 238, 245);
+    margin: 30px 500px 0px 500px;
+    height: 250px;
+    border: 2px solid grey;
+    text-align: center;
+    border-radius: 25px;
+}
+
+div{
+    padding: 15px;
+}
+
+input.btn{
+    border: 2px solid gray;
+    border-radius: 15px;
+    width: 120px;
+}
+
+input.btn:hover{
+    background-color: lightseagreen;
+    font-weight: bold;
+}
+
+ul{
+    margin: 40px 0px;
+}
+ul li {
+
+    padding: 5px;
+    background: rgb(216, 238, 245);
+    margin: 5px 0;
+  }
