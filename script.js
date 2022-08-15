@@ -10,7 +10,7 @@ function savetoCloudStorage(event){
         category
     }
 
-    axios.post("https://crudcrud.com/api/c5b33544f7424d029bfa78198b/AppontData",obj)
+    axios.post("https://crudcrud.com/api/c5b33544f7424d029bfe2359da78198b/AppointmentData",obj)
     .then((respone) => {
         onScreen(respone.data)
     })
@@ -19,6 +19,18 @@ function savetoCloudStorage(event){
         console.log(err)
     })
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+    axios.get("https://crudcrud.com/api/c5b33544f7424d029bfe2359da78198b/AppointmentData")
+    .then((response) => {
+        for(var i=0; i<response.data.length ; i++) {
+            onScreen(response.data[i])
+        }
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+})
 
 function onScreen(detail){
     const parentNode = document.getElementById('users');
