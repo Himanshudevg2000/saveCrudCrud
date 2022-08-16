@@ -10,7 +10,7 @@ function savetoCloudStorage(event){
         category
     }
 
-    axios.post("https://crudcrud.com/api/c5b33544f7424d029bfe2359da78198b/AppointmentData",obj)
+    axios.post("https://crudcrud.com/api/a6aac3f42be14153a7402ebe5ff4e785/AppointmentData",obj)
     .then((respone) => {
         onScreen(respone.data)
     })
@@ -21,7 +21,7 @@ function savetoCloudStorage(event){
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/c5b33544f7424d029bfe2359da78198b/AppointmentData")
+    axios.get("https://crudcrud.com/api/a6aac3f42be14153a7402ebe5ff4e785/AppointmentData")
     .then((response) => {
         for(var i=0; i<response.data.length ; i++) {
             onScreen(response.data[i])
@@ -34,18 +34,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function onScreen(detail){
     const parentNode = document.getElementById('users');
-    const childHTML = `<li id=${detail._id} > ${detail.expense} - ${detail.description} - ${detail.category}  <button id="edit" onclick=editUser('${detail._id}','${detail.expense}')> Edit </button> <button onclick=deleteUser('${detail._id}')> Delete </button>  </li>`
+    const childHTML = `<li id=${detail._id} > ${detail.expense} - ${detail.description} - ${detail.category}
+    <button onclick = "editUser('${detail.description}', '${detail.expense}','${detail._id}')"> Edit </button> 
+    <button onclick=deleteUser('${detail._id}')> Delete </button>  </li>`
     parentNode.innerHTML = parentNode.innerHTML + childHTML;
 }
 
 function deleteUser(detailId) {
-
-    axios.delete(`https://crudcrud.com/api/c5b33544f7424d029bfe2359da78198b/AppointmentData/${detailId}`)
+    axios.delete(`https://crudcrud.com/api/a6aac3f42be14153a7402ebe5ff4e785/AppointmentData/${detailId}`)
     .then((response) => {
         removeFromScreen(detailId)
     })
     .catch((err) => {
-        document.body.innerHTML = document.body.innerHTML + "<h6> Nothing to delete </h6> "
+        document.body.innerHTML = document.body.innerHTML + "<h4> Nothing to delete </h4> "
         console.log(err)
     })
 }
@@ -56,8 +57,8 @@ function removeFromScreen(detailId){
     parentNode.removeChild(childNodeToDelete);
 }
 
-function editUser(Chdescription,expense){
+function editUser(Chdescription,expenseamount,detailId){
     document.getElementById('description').value = Chdescription
-    document.getElementById('expense').value = expense
-    deleteUser(Chdescription)
+    document.getElementById('expense').value = expenseamount
+    deleteUser(detailId)
 }
